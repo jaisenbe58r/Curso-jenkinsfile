@@ -1,50 +1,19 @@
-pipeline {
+ipeline {
   agent any
+
+  parameters {
+    choice(
+      description: 'Run flyway database migration using latest master branch from prices in what environment?',
+      name: 'environment',
+      choices: ['PRE', 'PRO']
+    )
+  }
+
   stages {
-
-    stage('Stage 1') {
+    stage("Wat") {
       steps {
-        script {
-          echo 'This whole pipeline will take ~40sec to finish.'
-        }
+        echo "selectedEnvironment: ${params.environment}"
       }
     }
-
-    stage('Parallel stages') {
-      parallel {
-
-        stage('Sequential nested stages') {
-          stages {
-            stage('Stage 2') {
-              steps {
-                script {
-                  echo 'Stage 2'
-                  sh 'sleep 20'
-                }
-              }
-            }
-            stage('Stage 3') {
-              steps {
-                script {
-                  echo 'Stage 3'
-                  sh 'sleep 20'
-                }
-              }
-            }
-          }
-        }
-
-        stage('Stage 4') {
-          steps {
-            script {
-              echo 'Stage 4'
-              sh 'sleep 20'
-            }
-          }
-        }
-
-      }
-    }
-
   }
 }
